@@ -7,6 +7,12 @@ resource "aws_lambda_function" "line_bot_lambda" {
 
     memory_size = 128
     timeout     = 900
+    environment {
+        variables = {
+            CHANNEL_SECRET = aws_secretsmanager_secret.channel_secret.
+            CHANNEL_TOKEN  = aws_secretsmanager_secret.channel_token.name
+        }
+    }
 
     depends_on = [ aws_cloudwatch_log_group.line_bot_lambda_log_group ]
 }
