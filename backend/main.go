@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	// "fmt"
-	"log"
+	// "log"
 	"net/http"
 	// "os"
 
@@ -11,16 +11,16 @@ import (
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/awslabs/aws-lambda-go-api-proxy/gin"
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
+	// "github.com/joho/godotenv"
 	// "github.com/line/line-bot-sdk-go/linebot"
 )
 
 var ginLambda *ginadapter.GinLambda
 
 func init() {
-	if err := godotenv.Load(); err != nil {
-		log.Fatal(err)
-	}
+	// if err := godotenv.Load(); err != nil {
+	// 	log.Fatal(err)
+	// }
 	// bot, err := linebot.New(
 	// 	os.Getenv("CHANNEL_SECRET"),
 	// 	os.Getenv("CHANNEL_TOKEN"),

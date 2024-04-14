@@ -7,13 +7,6 @@ data "aws_iam_policy_document" "line_bot_api_gateway_policy_document" {
         }
         actions = [
             "execute-api:Invoke",
-            "logs:CreateLogGroup",
-            "logs:CreateLogStream",
-            "logs:DescribeLogGroups",
-            "logs:DescribeLogStreams",
-            "logs:PutLogEvents",
-            "logs:GetLogEvents",
-            "logs:FilterLogEvents"
         ]
         resources = [
             "arn:aws:execute-api:${var.region}:*:*/*/*"
