@@ -1,12 +1,14 @@
 resource "aws_lambda_function" "line_bot_lambda" {
     filename      = "dummy_function.zip"
-    function_name = "line-bot-api"
+    function_name = local.lambda_function_name
     role          = aws_iam_role.line_bot_lambda_role.arn
     handler       = "lambda"
     runtime       = "provided.al2023"
 
     memory_size = 128
     timeout     = 900
+
+    depends_on = [ aws_cloudwatch_log_group.line_bot_lambda_log_group ]
 }
 
 resource "aws_lambda_permission" "line_bot_api_gateway_lambda" {

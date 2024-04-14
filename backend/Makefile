@@ -14,7 +14,8 @@ build: vet
 		go build
 .PHONY: build
 
-lambda_build:
+lambda_deploy:
 	GOOS=linux GOARCH=arm64 go build -tags lambda.norpc -o bootstrap main.go && \
-		zip myFunction.zip bootstrap
+		zip myFunction.zip bootstrap && \
+		aws lambda update-function-code --region ap-northeast-1 --function-name line-bot-api --profile nara-line --zip-file fileb://myFunction.zip
 .PHONY: lambda_build
