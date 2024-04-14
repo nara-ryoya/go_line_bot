@@ -1,4 +1,4 @@
 module "main" {
-    source = "../modules"
-    region = "ap-northeast-1"
+  source = "../modules"
+  region = "ap-northeast-1"
 }
