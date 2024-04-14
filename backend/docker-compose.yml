@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  api:
+    image: go-linebot-api
+    container_name: go-linebot-api
+    tty: true
+    ports:
+      - 8080:8080
+    environment:
+      - DB_HOST=docker-postgres
+    build: .
+volumes:
+  db-store:
