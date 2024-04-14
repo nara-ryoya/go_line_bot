@@ -22,3 +22,6 @@ go.work
 .env
 
 go_linebot
+
+myFunction.zip
+bootstrap
