@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:16
+    container_name: docker-postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - db-store:/var/lib/postgresql/data
+      - ./script:/docker-entrypoint-initdb.d
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=user
+      - POSTGRES_DB=db
+      - "TZ=Asia/Tokyo"
+  api:
+    image: go-api
+    container_name: go-api
+    tty: true
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=docker-postgres
+    build: .
+volumes:
+  db-store:
