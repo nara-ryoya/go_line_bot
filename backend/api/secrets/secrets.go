@@ -11,7 +11,7 @@ import (
 
 type Secrets struct {
 	ChannelSecret string
-	ChannelToken string
+	ChannelToken  string
 }
 
 func getSecret(secretName string, region string) string {
@@ -46,7 +46,7 @@ func GetAllSecrets() Secrets {
 
 	allSecrets := Secrets{
 		ChannelSecret: channelSecret,
-		ChannelToken: channelToken,
+		ChannelToken:  channelToken,
 	}
 	return allSecrets
 

@@ -1,21 +1,18 @@
 fmt:
-	go fmt
+	go fmt ./...
 .PHONY: fmt
 
 lint: fmt
-		staticcheck
+		staticcheck ./...
 .PHONY: liint
 vet: fmt
-		go vet
+		go vet ./...
 .PHONY: vet
 
-build: vet
-		go mod tidy
-		go build
-.PHONY: build
 
 lambda_deploy:
-	GOOS=linux GOARCH=amd64 go build -tags lambda.norpc -o bootstrap main.go && \
+	GOOS=linux GOARCH=amd64 go build -tags lambda.norpc -o bootstrap cmd/lambda_handler.go && \
 		zip myFunction.zip bootstrap && \
-		aws lambda update-function-code --region ap-northeast-1 --function-name line-bot-api --profile nara-line --zip-file fileb://myFunction.zip
+		aws lambda update-function-code --region ap-northeast-1 --function-name line-bot-api --profile nara-line --zip-file fileb://myFunction.zip && \
+		rm bootstrap myFunction.zip
 .PHONY: lambda_build

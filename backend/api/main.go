@@ -1,25 +1,16 @@
-package main
+package api
 
 import (
-	"context"
 	"fmt"
-	"go_linebot/secrets"
+	"github.com/gin-gonic/gin"
+	"go_linebot/api/secrets"
 	"log"
 	"net/http"
-	// "os"
-
-	"github.com/aws/aws-lambda-go/events"
-	"github.com/aws/aws-lambda-go/lambda"
-	"github.com/awslabs/aws-lambda-go-api-proxy/gin"
-	"github.com/gin-gonic/gin"
-
 
 	"github.com/line/line-bot-sdk-go/linebot"
 )
 
-var ginLambda *ginadapter.GinLambda
-
-func init() {
+func NewServer() (*gin.Engine, error) {
 	// if err := godotenv.Load(); err != nil {
 	// 	log.Fatal(err)
 	// }
@@ -31,6 +22,7 @@ func init() {
 
 	if err != nil {
 		log.Fatal(err)
+		return nil, err
 	}
 	router := gin.Default()
 	router.GET("/hello", func(ctx *gin.Context) {
@@ -61,14 +53,5 @@ func init() {
 			}
 		}
 	})
-	// router.Run(fmt.Sprintf(":%s", port))
-	ginLambda = ginadapter.New(router)
-}
-
-func Handler(ctx context.Context, req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	return ginLambda.ProxyWithContext(ctx, req)
-}
-
-func main() {
-	lambda.Start(Handler)
+	return router, nil
 }
